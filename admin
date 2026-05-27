@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Frontier — 트랙 선택 가이드</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --brand: #F97316;
+    --brand-dark: #EA580C;
+    --brand-light: #FFF7ED;
+    --brand-mid: #FFEDD5;
+    /* Track A: 데이터 분석 자동화 (파랑) */
+    --t1: #3B82F6;
+    --t1-light: #EFF6FF;
+    --t1-mid: #DBEAFE;
+    /* Track B: 프로그램 빌드 (보라) */
+    --t2: #8B5CF6;
+    --t2-light: #F5F3FF;
+    --t2-mid: #EDE9FE;
+    --gray-50: #FAFAF9;
+    --gray-100: #F5F5F4;
+    --gray-200: #E7E5E4;
+    --gray-300: #D6D3D1;
+    --gray-400: #A8A29E;
+    --gray-500: #78716C;
+    --gray-600: #57534E;
+    --gray-700: #44403C;
+    --gray-800: #292524;
+    --gray-900: #1C1917;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  .top-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--brand), #FB923C);
+  }
+
+  .hero {
+    text-align: center;
+    padding: 48px 20px 40px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--brand);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--gray-900);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 15px;
+    color: var(--gray-500);
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .section {
+    margin-bottom: 32px;
+  }
+  .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brand);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .track-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .track-card {
+    border-radius: var(--radius);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .track-card.t1 {
+    background: var(--t1-light);
+    border: 1.5px solid var(--t1-mid);
+  }
+  .track-card.t2 {
+    background: var(--t2-light);
+    border: 1.5px solid var(--t2-mid);
+  }
+  .track-num {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .track-card.t1 .track-num { color: var(--t1); }
+  .track-card.t2 .track-num { color: var(--t2); }
+  .track-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 8px;
+  }
+  .track-card .subtitle {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.5;
+  }
+  .track-card .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .track-card .keywords span {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .track-card.t1 .keywords span {
+    background: var(--t1-mid);
+    color: var(--t1);
+  }
+  .track-card.t2 .keywords span {
+    background: var(--t2-mid);
+    color: var(--t2);
+  }
+
+  /* 공통 Day 1 배너 */
+  .common-banner {
+    background: var(--brand-light);
+    border: 1.5px solid var(--brand-mid);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 12px;
+  }
+  .common-day {
+    display: inline-block;
+    background: var(--brand);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+  }
+  .common-desc {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 12px;
+  }
+  .common-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .common-flow span {
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid var(--brand-mid);
+    color: var(--gray-700);
+    padding: 5px 10px;
+    border-radius: 8px;
+  }
+  .common-note {
+    font-size: 12.5px;
+    color: var(--brand-dark);
+    font-weight: 600;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* 트랙별 커리큘럼 카드 */
+  .curri-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .curri-card {
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    border: 1.5px solid;
+  }
+  .curri-card.t1 { background: var(--t1-light); border-color: var(--t1-mid); }
+  .curri-card.t2 { background: var(--t2-light); border-color: var(--t2-mid); }
+  .curri-head {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .curri-card.t1 .curri-head { color: var(--t1); }
+  .curri-card.t2 .curri-head { color: var(--t2); }
+  .curri-goal {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .curri-day { margin-bottom: 12px; }
+  .curri-day:last-child { margin-bottom: 0; }
+  .curri-day-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .curri-day ul { list-style: none; }
+  .curri-day li {
+    font-size: 13px;
+    color: var(--gray-700);
+    line-height: 1.5;
+    margin-bottom: 4px;
+    padding-left: 14px;
+    position: relative;
+  }
+  .curri-day li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    font-weight: 700;
+  }
+
+  .checklist {
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--gray-200);
+    overflow: hidden;
+  }
+  .checklist-header {
+    padding: 24px 24px 0;
+  }
+  .checklist-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 4px;
+  }
+  .checklist-header p {
+    font-size: 14px;
+    color: var(--gray-500);
+    margin-bottom: 20px;
+  }
+  .checklist-items {
+    padding: 0 12px 12px;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .check-item:hover {
+    background: var(--gray-50);
+  }
+  .check-item.checked {
+    background: var(--gray-50);
+  }
+  .check-item.checked[data-track="1"] {
+    background: var(--t1-light);
+  }
+  .check-item.checked[data-track="2"] {
+    background: var(--t2-light);
+  }
+  .checkbox {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--gray-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    margin-top: 1px;
+  }
+  .check-item.checked[data-track="1"] .checkbox {
+    background: var(--t1);
+    border-color: var(--t1);
+  }
+  .check-item.checked[data-track="2"] .checkbox {
+    background: var(--t2);
+    border-color: var(--t2);
+  }
+  .checkbox svg {
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .check-item.checked .checkbox svg {
+    opacity: 1;
+  }
+  .check-label {
+    font-size: 15px;
+    color: var(--gray-700);
+    line-height: 1.5;
+  }
+
+  .progress-bar {
+    margin: 20px 24px 0;
+    padding-bottom: 20px;
+  }
+  .progress-track {
+    height: 6px;
+    background: var(--gray-100);
+    border-radius: 100px;
+    overflow: hidden;
+    display: flex;
+  }
+  .progress-fill-t1 {
+    height: 100%;
+    background: var(--t1);
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+  .progress-fill-t2 {
+    height: 100%;
+    background: var(--t2);
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .progress-labels .l1 { color: var(--t1); }
+  .progress-labels .l2 { color: var(--t2); }
+
+  .result-area {
+    margin-top: 24px;
+  }
+  .result-card {
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    text-align: center;
+    display: none;
+    animation: fadeUp 0.4s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .result-card.show { display: block; }
+  .result-card.t1-result {
+    background: linear-gradient(135deg, var(--t1-light), #DBEAFE);
+    border: 1.5px solid var(--t1-mid);
+  }
+  .result-card.t2-result {
+    background: linear-gradient(135deg, var(--t2-light), #EDE9FE);
+    border: 1.5px solid var(--t2-mid);
+  }
+  .result-card.tie-result {
+    background: linear-gradient(135deg, var(--t1-light), var(--t2-light));
+    border: 1.5px solid var(--gray-200);
+  }
+  .result-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+  .result-card h3 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .result-card.t1-result h3 { color: var(--t1); }
+  .result-card.t2-result h3 { color: var(--t2); }
+  .result-card.tie-result h3 { color: var(--gray-700); }
+  .result-card .result-sub {
+    font-size: 15px;
+    color: var(--gray-600);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .result-examples {
+    text-align: left;
+    background: rgba(255,255,255,0.6);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+  }
+  .result-examples .ex-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+  .result-examples li {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: 6px;
+    padding-left: 4px;
+    list-style: none;
+  }
+  .result-examples li::before {
+    content: '· ';
+    font-weight: 700;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 32px;
+    color: var(--gray-400);
+    font-size: 14px;
+  }
+
+  .examples-section {
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--gray-200);
+    overflow: hidden;
+  }
+  .examples-header {
+    padding: 24px 24px 16px;
+  }
+  .examples-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 4px;
+  }
+  .examples-header p {
+    font-size: 14px;
+    color: var(--gray-500);
+  }
+  .example-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--gray-100);
+  }
+  .example-col {
+    padding: 16px 20px;
+  }
+  .example-col:first-child {
+    border-right: 1px solid var(--gray-100);
+  }
+  .example-col-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .example-col-title.c1 { color: var(--t1); }
+  .example-col-title.c2 { color: var(--t2); }
+  .example-col li {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.5;
+    margin-bottom: 6px;
+    list-style: none;
+    padding-left: 0;
+  }
+  .example-col li::before {
+    content: '· ';
+    font-weight: 700;
+  }
+  .examples-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--gray-100);
+  }
+
+  /* Ambiguous pairs */
+  .ambiguous-pairs {
+    padding: 20px 24px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .ap-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+  }
+  .ap-subtitle {
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-bottom: 16px;
+  }
+  .ap-group {
+    margin-bottom: 14px;
+  }
+  .ap-group:last-child { margin-bottom: 0; }
+  .ap-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .ap-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .ap-row:last-child { margin-bottom: 0; }
+  .ap-row.to-a { background: var(--t1-light); }
+  .ap-row.to-b { background: var(--t2-light); }
+  .ap-scenario {
+    flex: 1;
+    color: var(--gray-700);
+    line-height: 1.45;
+  }
+  .ap-arrow {
+    color: var(--gray-400);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .ap-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .ap-row.to-a .ap-badge { background: var(--t1); }
+  .ap-row.to-b .ap-badge { background: var(--t2); }
+
+  .tip {
+    background: var(--brand-light);
+    border: 1.5px solid var(--brand-mid);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .tip-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tip-content {
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.6;
+  }
+  .tip-content strong {
+    color: var(--gray-900);
+  }
+
+  .result-day1-note {
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    line-height: 1.5;
+  }
+
+  .reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 100px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-500);
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover {
+    border-color: var(--brand);
+    color: var(--brand-dark);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 20px 20px;
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 16px 16px 60px; }
+    .hero { padding: 36px 12px 32px; }
+    .hero h1 { font-size: 22px; }
+    .checklist-header { padding: 20px 20px 0; }
+    .checklist-items { padding: 0 8px 8px; }
+    .check-item { padding: 12px 10px; }
+    .progress-bar { margin: 16px 20px 0; }
+    .examples-header { padding: 20px 20px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">AI Frontier 2026</div>
+    <h1>나에게 맞는 트랙은?</h1>
+    <p>Day 1은 공통, <strong>Day 2~3</strong>은 2개 트랙으로 나뉩니다.<br>내 업무 성향으로 맞는 트랙을 자동 추천받아 보세요.</p>
+  </div>
+
+  <!-- Track Intro -->
+  <div class="section">
+    <div class="section-label">Day 2~3 · 2개 트랙</div>
+    <div class="track-cards">
+      <div class="track-card t1">
+        <div class="track-num">Track A</div>
+        <h3>데이터 분석 자동화</h3>
+        <div class="subtitle">데이터로 <strong>분석하고, 인사이트 뽑고, 보고서·대시보드로</strong> 자동 출력하는 분석 파이프라인</div>
+        <div class="keywords">
+          <span>pandas</span>
+          <span>데이터 분석</span>
+          <span>시각화</span>
+          <span>보고서 자동화</span>
+          <span>Streamlit 대시보드</span>
+        </div>
+      </div>
+      <div class="track-card t2">
+        <div class="track-num">Track B</div>
+        <h3>프로그램 빌드</h3>
+        <div class="subtitle">반복 업무를 대신하는 <strong>실행 프로그램·AI 도구</strong>를 직접 설계·빌드·배포하는 End-to-End 시스템</div>
+        <div class="keywords">
+          <span>Cursor 심화</span>
+          <span>프로그램 설계</span>
+          <span>PyQt GUI</span>
+          <span>.exe 빌드</span>
+          <span>AI 챗봇·유틸</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Curriculum at a glance -->
+  <div class="section">
+    <div class="section-label">커리큘럼 한눈에</div>
+
+    <!-- Common Day 1 -->
+    <div class="common-banner">
+      <div class="common-day">Day 1 · 공통</div>
+      <div class="common-desc">두 트랙 모두 함께 듣습니다</div>
+      <div class="common-flow">
+        <span>Cursor · Python 세팅</span>
+        <span>데이터 · AI 개념 + 보안</span>
+        <span>프롬프트 · Canvas</span>
+        <span>pandas · ipynb 기초</span>
+        <span>개인정보 탐색 (AI Agent)</span>
+        <span>PRD · 트랙 선택</span>
+      </div>
+      <div class="common-note">↓ Day 1 마지막 '과제 정의 워크숍 &amp; 트랙 선택'에서 트랙을 정합니다</div>
+    </div>
+
+    <!-- Track curriculum cards -->
+    <div class="curri-cards">
+      <div class="curri-card t1">
+        <div class="curri-head">Track A · 데이터 분석 자동화</div>
+        <div class="curri-goal">데이터 → 분석 · 인사이트 · 보고까지 자동화하는 파이프라인 설계·구현</div>
+        <div class="curri-day">
+          <div class="curri-day-label">Day 2</div>
+          <ul>
+            <li>데이터 집계·분석 (pandas) + matplotlib · seaborn 시각화</li>
+            <li>python-pptx · docx로 PPT · Word 보고서 자동화</li>
+            <li>Streamlit 대시보드 · PyQt GUI 도구 제작</li>
+            <li>윈도우 스케줄러로 정기 보고서 자동 실행</li>
+          </ul>
+        </div>
+        <div class="curri-day">
+          <div class="curri-day-label">Day 3</div>
+          <ul>
+            <li>Gemini API 챗봇 + SMTP 첨부파일 자동 메일 발송</li>
+            <li>본인 과제 PRD 작성 · 해결 방향성 도출</li>
+            <li>프로토타입 + 프로젝트 개요서 1p + 1:1 피드백</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="curri-card t2">
+        <div class="curri-head">Track B · 프로그램 빌드</div>
+        <div class="curri-goal">AI Agent를 설계·구현해 즉시 적용 가능한 End-to-End 자동화 시스템 구축</div>
+        <div class="curri-day">
+          <div class="curri-day-label">Day 2</div>
+          <ul>
+            <li>Cursor 심화 — Composer · Agent 모드 · .cursorrules</li>
+            <li>프로그램 설계 · 함수/클래스/모듈 분리 · 구조화</li>
+            <li>PyQt로 GUI 프로그램 개발 (파일 선택→실행→결과)</li>
+            <li>디버깅 · PyInstaller로 .exe 빌드 · 자동 실행</li>
+          </ul>
+        </div>
+        <div class="curri-day">
+          <div class="curri-day-label">Day 3</div>
+          <ul>
+            <li>Gemini API 연동 — AI 기능 들어간 챗봇/유틸 1종 구현</li>
+            <li>본인 과제 PRD (기능 명세 · 입출력 · 모듈 구조 설계)</li>
+            <li>프로토타입 + 프로젝트 개요서 1p + 1:1 피드백</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checklist -->
+  <div class="section">
+    <div class="section-label">자가진단</div>
+    <div class="checklist">
+      <div class="checklist-header">
+        <h2>내 업무에 해당하는 항목을 체크하세요</h2>
+        <p>해당하는 항목을 모두 눌러주세요. 결과가 실시간으로 바뀝니다.</p>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-track">
+          <div class="progress-fill-t1" id="bar-t1"></div>
+          <div class="progress-fill-t2" id="bar-t2"></div>
+        </div>
+        <div class="progress-labels">
+          <span class="l1">Track A · <span id="score-t1">0</span>개</span>
+          <span class="l2">Track B · <span id="score-t2">0</span>개</span>
+        </div>
+      </div>
+
+      <div class="checklist-items" id="checklist">
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">대시보드나 시각화 보고서를 만든다</div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">반복 작업을 대신 처리해줄 <strong>도구 · 프로그램</strong>을 직접 만들고 싶다</div>
+        </div>
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">데이터를 <strong>해석·요약</strong>해서 인사이트가 담긴 리포트로 공유해야 한다<br><small style="color:var(--gray-400)">(집계 → 분석 → 보고서 자동화)</small></div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">동료에게 나눠줄 <strong>실행 파일(.exe) · GUI 프로그램</strong>이 필요하다</div>
+        </div>
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">원인 · 추세 · 패턴을 찾아내는 분석 업무가 있다</div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">개인정보 탐색·마스킹 같은 <strong>처리 로직을 도구로</strong> 만들고 싶다</div>
+        </div>
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">쌓인 데이터를 기간 · 지역 · 유형별로 집계하고 분석해야 한다</div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">버튼 누르면 <strong>파일 선택 → 실행 → 결과</strong>가 나오는 GUI 툴을 원한다</div>
+        </div>
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">KPI · 실적 리포트를 매번 같은 양식으로 수작업한다</div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">AI 기능(챗봇 · 요약 · 분류)이 들어간 <strong>프로그램</strong>을 만들고 싶다</div>
+        </div>
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">여러 엑셀 파일 · 시트에 흩어진 데이터를 하나로 모아 집계한다<br><small style="color:var(--gray-400)">(VBA로 하려다 막힌 경험이 있다면 여기)</small></div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">Config · 설정값을 자동으로 비교 · 검증하는 <strong>도구</strong>가 필요하다</div>
+        </div>
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">중복고장 · 경보(FOMS) 데이터에서 같은 이슈 패턴을 찾아내야 한다</div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">사내 FAQ · 매뉴얼에 답하는 <strong>AI 챗봇 · 유틸</strong>을 만들고 싶다</div>
+        </div>
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">정기 보고서(주간 · 월간)를 만들어 자동 발송하고 싶다</div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">손 많이 가는 정형 처리(파일 분류 · 변환 등)를 <strong>프로그램으로 굳히고</strong> 싶다</div>
+        </div>
+
+        <div class="check-item" data-track="1" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">분석 결과를 PPT · Word 보고서로 정리하는 일이 많다</div>
+        </div>
+
+        <div class="check-item" data-track="2" onclick="toggle(this)">
+          <div class="checkbox"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7.5L5.5 10L11 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check-label">한 번 만들어 두고두고 돌려쓸 <strong>'완성된 프로그램'</strong>이 목표다</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="section result-area" id="result-area">
+    <div class="empty-state" id="empty-state">위 항목을 체크하면 결과가 여기에 나타납니다</div>
+
+    <div class="result-note" id="result-note" style="display:none; text-align:center; padding:12px 20px; font-size:13px; color:var(--gray-500); background:var(--gray-100); border-radius:10px; margin-bottom:16px;">2~3개 이상 체크하면 더 정확한 추천을 받을 수 있어요</div>
+
+    <div class="result-card t1-result" id="result-t1">
+      <div class="result-icon">&#128202;</div>
+      <h3 id="result-t1-title">Track A · 데이터 분석 자동화 추천!</h3>
+      <div class="result-sub" id="result-t1-text"></div>
+      <div class="result-examples">
+        <div class="ex-title">이런 프로젝트를 만들게 됩니다</div>
+        <ul>
+          <li>중복고장 원인 분석 + 월간 리포트 자동 생성</li>
+          <li>KPI · 실적 대시보드(Streamlit) · PPT · Word 보고서 자동화</li>
+          <li>여러 엑셀 파일 자동 통합 + 기간 · 유형별 집계</li>
+          <li>VOC · 텍스트 데이터 분류 · 요약 인사이트 리포트</li>
+          <li>정기 보고서 스케줄 자동 실행 · 메일 발송</li>
+        </ul>
+      </div>
+      <div class="result-day1-note">Day 1 마지막에 '과제 정의 워크숍 &amp; 트랙 선택' 시간이 있어요. 최종 결정은 그때 해도 괜찮습니다.</div>
+      <button class="reset-btn" onclick="resetAll()">&#8635; 다시 하기</button>
+    </div>
+
+    <div class="result-card t2-result" id="result-t2">
+      <div class="result-icon">&#128736;&#65039;</div>
+      <h3 id="result-t2-title">Track B · 프로그램 빌드 추천!</h3>
+      <div class="result-sub" id="result-t2-text"></div>
+      <div class="result-examples">
+        <div class="ex-title">이런 프로젝트를 만들게 됩니다</div>
+        <ul>
+          <li>개인정보 탐색 · 마스킹 GUI 도구 (.exe로 배포)</li>
+          <li>Config 자동 비교 · 검증 프로그램</li>
+          <li>파일 분류 · 변환 등 반복 처리 자동화 도구</li>
+          <li>사내 FAQ · 매뉴얼 질의응답 AI 챗봇 · 유틸</li>
+          <li>Gemini API를 붙인 업무용 AI 도구 1종</li>
+        </ul>
+      </div>
+      <div class="result-day1-note">Day 1 마지막에 '과제 정의 워크숍 &amp; 트랙 선택' 시간이 있어요. 최종 결정은 그때 해도 괜찮습니다.</div>
+      <button class="reset-btn" onclick="resetAll()">&#8635; 다시 하기</button>
+    </div>
+
+    <div class="result-card tie-result" id="result-tie">
+      <div class="result-icon">&#129300;</div>
+      <h3>두 트랙 모두 잘 맞아요</h3>
+      <div class="result-sub">데이터 분석과 프로그램 빌드 모두 필요한 업무를 하고 계시네요.<br>아래 판정 기준으로 골라보세요.</div>
+      <div class="result-examples">
+        <div class="ex-title">이럴 땐 이 트랙</div>
+        <ul>
+          <li>최종 산출물이 <strong>사람이 보는 분석 결과 · 리포트 · 대시보드</strong>라면 → Track A</li>
+          <li>최종 산출물이 <strong>실행해서 일을 처리하는 프로그램 · 도구</strong>라면 → Track B</li>
+          <li><small style="color:var(--gray-500);">두 트랙 모두 Cursor + Python을 씁니다. Day 1은 공통이고, Day 2~3에 무엇을 완성하느냐의 차이예요.</small></li>
+        </ul>
+      </div>
+      <div class="result-day1-note">Day 1 마지막에 '과제 정의 워크숍 &amp; 트랙 선택' 시간이 있어요. 최종 결정은 그때 해도 괜찮습니다.</div>
+      <button class="reset-btn" onclick="resetAll()">&#8635; 다시 하기</button>
+    </div>
+  </div>
+
+  <!-- Examples Table -->
+  <div class="section">
+    <div class="section-label">참고</div>
+    <div class="examples-section">
+      <div class="examples-header">
+        <h2>트랙별 대표 프로젝트</h2>
+        <p>"이런 결과물을 만들고 싶다면 이 트랙이에요"</p>
+      </div>
+
+      <div class="example-columns">
+        <div class="example-col">
+          <div class="example-col-title c1">Track A · 데이터 분석 자동화</div>
+          <ul>
+            <li>월별 · 지역별 고장현황 집계 · 분석 리포트</li>
+            <li>KPI 대시보드(Streamlit) 자동 생성</li>
+            <li>엑셀 자동 통합 · 집계 + PPT/Word 보고서</li>
+            <li>VOC 텍스트 분류 · 요약 인사이트 리포트</li>
+            <li>정기 보고서 스케줄 자동 발송</li>
+          </ul>
+        </div>
+        <div class="example-col">
+          <div class="example-col-title c2">Track B · 프로그램 빌드</div>
+          <ul>
+            <li>개인정보 탐색 · 마스킹 GUI 도구(.exe)</li>
+            <li>Config 자동 비교 · 검증 프로그램</li>
+            <li>파일 분류 · 변환 반복처리 자동화 도구</li>
+            <li>사내 FAQ 질의응답 AI 챗봇</li>
+            <li>Gemini API 붙인 업무용 AI 유틸</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ambiguous-pairs">
+        <div class="ap-title">헷갈리기 쉬운 케이스 비교</div>
+        <div class="ap-subtitle">같은 업무라도 <strong>분석 결과가 목표면 Track A</strong>, <strong>실행되는 프로그램이 목표면 Track B</strong>입니다.</div>
+
+        <div class="ap-group">
+          <div class="ap-label">개인정보 점검</div>
+          <div class="ap-row to-a">
+            <div class="ap-scenario">포함 현황을 <strong>집계 · 리포트</strong>로 정리</div>
+            <div class="ap-arrow">&rarr;</div>
+            <div class="ap-badge">Track A</div>
+          </div>
+          <div class="ap-row to-b">
+            <div class="ap-scenario">찾아서 마스킹하는 <strong>도구(.exe)</strong> 제작 · 배포</div>
+            <div class="ap-arrow">&rarr;</div>
+            <div class="ap-badge">Track B</div>
+          </div>
+        </div>
+
+        <div class="ap-group">
+          <div class="ap-label">VOC · 문의 데이터</div>
+          <div class="ap-row to-a">
+            <div class="ap-scenario">유형별 <strong>집계 · 인사이트</strong> 월간 리포트</div>
+            <div class="ap-arrow">&rarr;</div>
+            <div class="ap-badge">Track A</div>
+          </div>
+          <div class="ap-row to-b">
+            <div class="ap-scenario">자동 분류 · 응대하는 <strong>챗봇 · 프로그램</strong> 제작</div>
+            <div class="ap-arrow">&rarr;</div>
+            <div class="ap-badge">Track B</div>
+          </div>
+        </div>
+
+        <div class="ap-group">
+          <div class="ap-label">중복고장 · FOMS 경보</div>
+          <div class="ap-row to-a">
+            <div class="ap-scenario">원인 · 패턴 <strong>분석 리포트 · 추세 대시보드</strong></div>
+            <div class="ap-arrow">&rarr;</div>
+            <div class="ap-badge">Track A</div>
+          </div>
+          <div class="ap-row to-b">
+            <div class="ap-scenario">경보를 받아 처리 · 알림하는 <strong>유틸</strong> 제작</div>
+            <div class="ap-arrow">&rarr;</div>
+            <div class="ap-badge">Track B</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="examples-footer">
+        <div class="tip">
+          <div class="tip-icon">&#128161;</div>
+          <div class="tip-content">
+            <strong>가르는 기준 한 줄</strong><br>
+            결과물의 핵심이 <strong>데이터에서 뽑은 분석 · 인사이트 · 보고서 · 대시보드</strong>면 → Track A (데이터 분석 자동화)<br>
+            결과물의 핵심이 <strong>실행해서 일을 처리하는 프로그램 · 도구(.exe · GUI · AI 유틸)</strong>면 → Track B (프로그램 빌드)<br>
+            <small style="color:var(--gray-500);">두 트랙 모두 Cursor + Python을 씁니다. Day 1은 공통이고, 'Day 2~3에 무엇을 완성하느냐'의 차이예요.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    AI Frontier 2026 · Day1 Company
+  </div>
+
+</div>
+
+<script>
+  function toggle(el) {
+    el.classList.toggle('checked');
+    updateResult();
+  }
+
+  function updateResult() {
+    const items = document.querySelectorAll('.check-item');
+    let t1 = 0, t2 = 0, total = 0;
+
+    items.forEach(item => {
+      if (item.classList.contains('checked')) {
+        total++;
+        if (item.dataset.track === '1') t1++;
+        else t2++;
+      }
+    });
+
+    document.getElementById('score-t1').textContent = t1;
+    document.getElementById('score-t2').textContent = t2;
+
+    const t1Total = document.querySelectorAll('.check-item[data-track="1"]').length;
+    const t2Total = document.querySelectorAll('.check-item[data-track="2"]').length;
+    const allTotal = t1Total + t2Total;
+
+    const t1Pct = allTotal > 0 ? (t1 / allTotal) * 100 : 0;
+    const t2Pct = allTotal > 0 ? (t2 / allTotal) * 100 : 0;
+    document.getElementById('bar-t1').style.width = t1Pct + '%';
+    document.getElementById('bar-t2').style.width = t2Pct + '%';
+
+    const empty = document.getElementById('empty-state');
+    const r1 = document.getElementById('result-t1');
+    const r2 = document.getElementById('result-t2');
+    const tie = document.getElementById('result-tie');
+
+    r1.classList.remove('show');
+    r2.classList.remove('show');
+    tie.classList.remove('show');
+
+    const note = document.getElementById('result-note');
+
+    if (total === 0) {
+      empty.style.display = 'block';
+      note.style.display = 'none';
+      return;
+    }
+
+    empty.style.display = 'none';
+    note.style.display = total <= 2 ? 'block' : 'none';
+
+    const diff = Math.abs(t1 - t2);
+
+    if (diff <= 1) {
+      tie.classList.add('show');
+    } else if (t1 > t2) {
+      const pct = Math.round((t1 / total) * 100);
+      document.getElementById('result-t1-text').innerHTML =
+        '분석 · 보고 성향 <strong>' + pct + '%</strong> · 체크한 ' + total + '개 중 ' + t1 + '개가 Track A 항목이에요.';
+      r1.classList.add('show');
+    } else {
+      const pct = Math.round((t2 / total) * 100);
+      document.getElementById('result-t2-text').innerHTML =
+        '프로그램 빌드 성향 <strong>' + pct + '%</strong> · 체크한 ' + total + '개 중 ' + t2 + '개가 Track B 항목이에요.';
+      r2.classList.add('show');
+    }
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.check-item').forEach(item => {
+      item.classList.remove('checked');
+    });
+    updateResult();
+    document.querySelector('.checklist').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+
+</body>
+</html>
